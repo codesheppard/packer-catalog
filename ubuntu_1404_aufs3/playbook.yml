@@ -1,0 +1,23 @@
+---
+- name: Install Docker on Ubuntu 14.04
+  hosts: all
+  # run as root
+  become: true
+  become_user: root
+
+  pre_tasks:
+    - name: format the extra drive
+      filesystem:
+        dev: /dev/xvdb
+        fstype: ext4
+    - name: mount the extra drive
+      mount:
+        name: /secondary
+        # ubuntu renames the block devices to xv* prefix
+        src: /dev/xvdb
+        fstype: ext4
+        state: mounted
+  roles:
+    - role: angstwad.docker_ubuntu
+      docker_opts: "--graph /secondary --storage-driver=aufs"
+
