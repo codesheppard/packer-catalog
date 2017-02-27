@@ -2,7 +2,7 @@
   "variables": {
     "aws_access_key": "",
     "aws_secret_key": "",
-    "docker_version": "1.13.1"
+    "docker_version": "1.12.3"
   },
   "builders": [{
     "type": "amazon-ebs",
